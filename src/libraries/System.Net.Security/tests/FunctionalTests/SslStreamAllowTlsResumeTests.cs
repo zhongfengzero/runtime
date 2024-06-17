@@ -133,8 +133,9 @@ namespace System.Net.Security.Tests
             server.Dispose();
         }
 
-        [Theory]
+        [ConditionalTheory]
         [MemberData(nameof(SslProtocolsData))]
+        [ActiveIssue("https://github.com/dotnet/runtime/issues/103354", typeof(PlatformDetection), nameof(PlatformDetection.IsArmOrArm64Process))]
         public Task NoClientCert_DefaultValue_ResumeSucceeds(SslProtocols sslProtocol)
         {
             SslServerAuthenticationOptions serverOptions = new SslServerAuthenticationOptions
@@ -187,8 +188,9 @@ namespace System.Net.Security.Tests
             return data;
         }
 
-        [Theory]
+        [ConditionalTheory]
         [MemberData(nameof(ClientCertTestData))]
+        [ActiveIssue("https://github.com/dotnet/runtime/issues/103354", typeof(PlatformDetection), nameof(PlatformDetection.IsArmOrArm64Process))]
         public Task ClientCert_DefaultValue_ResumeSucceeds(SslProtocols sslProtocol, bool certificateRequired, ClientCertSource certSource)
         {
             SslServerAuthenticationOptions serverOptions = new SslServerAuthenticationOptions
