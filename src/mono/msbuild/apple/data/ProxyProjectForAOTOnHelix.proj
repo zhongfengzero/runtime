@@ -103,6 +103,10 @@
        <RuntimeHostConfigurationOption Remove="@(_AppleUsedRuntimeHostConfigurationOption)" />
        <RuntimeHostConfigurationOption Include="@(_AppleUsedRuntimeHostConfigurationOption)" />
     </ItemGroup>
+
+    <PropertyGroup Condition="'$(EnableAggressiveTrimming)' == 'true' and '$(UseNativeAOTRuntime)' != 'true'">
+      <DynamicCodeSupport>false</DynamicCodeSupport>
+    </PropertyGroup>
   </Target>
 
   <Target Name="_PublishRuntimePack"
